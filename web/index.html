@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A reproducible, grounded personal-profile question-answering baseline." />
+    <title>MirrorGPT Lite — Grounded profile Q&amp;A</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to workspace</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Project summary">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          <div>
+            <p class="brand-name">MirrorGPT</p>
+            <p class="brand-edition">Lite baseline</p>
+          </div>
+        </div>
+
+        <div class="sidebar-copy">
+          <p class="eyebrow">CSE 598 · Capstone</p>
+          <h1>A personal agent that shows its work.</h1>
+          <p>Ask a question about the supplied profile. Every response includes the evidence used—or a clear abstention.</p>
+        </div>
+
+        <div class="system-card" aria-label="Baseline properties">
+          <div class="system-row"><span>Runtime</span><strong>Python 3.9+</strong></div>
+          <div class="system-row"><span>External calls</span><strong>0</strong></div>
+          <div class="system-row"><span>API keys</span><strong>None</strong></div>
+          <div class="system-row"><span>Mode</span><strong>Deterministic</strong></div>
+        </div>
+
+        <p class="privacy-note"><span aria-hidden="true">●</span> Profile data stays on this machine.</p>
+      </aside>
+
+      <main id="workspace" class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Interactive baseline</p>
+            <h2>Grounded profile Q&amp;A</h2>
+          </div>
+          <div class="live-badge"><span aria-hidden="true"></span> Ready locally</div>
+        </header>
+
+        <section class="profile-strip" aria-label="Active profile">
+          <div class="avatar" aria-hidden="true">TC</div>
+          <div class="profile-meta">
+            <span class="label">Active demonstration profile</span>
+            <strong>Thomas Crosley · Professional profile</strong>
+          </div>
+          <code>mirror/data/sample/crosleythomas_linkedin.txt</code>
+        </section>
+
+        <div class="content-grid">
+          <section class="panel ask-panel" aria-labelledby="ask-title">
+            <div class="panel-heading">
+              <div>
+                <span class="step">01</span>
+                <h3 id="ask-title">Ask the profile</h3>
+              </div>
+              <span class="shortcut">⌘ / Ctrl + Enter</span>
+            </div>
+
+            <form id="question-form">
+              <label for="question">Question</label>
+              <textarea id="question" name="question" rows="5" maxlength="500" aria-describedby="question-help">Where did you go to college?</textarea>
+              <div class="field-meta">
+                <span id="question-help">Use a question answerable from the profile.</span>
+                <span><span id="character-count">32</span>/500</span>
+              </div>
+              <button id="run-button" class="primary-button" type="submit">
+                <span class="button-label">Run baseline</span>
+                <span class="button-arrow" aria-hidden="true">→</span>
+              </button>
+            </form>
+
+            <div class="examples">
+              <p>Try an example</p>
+              <div class="chip-row">
+                <button type="button" class="example-chip" data-question="Where did you go to college?">Education</button>
+                <button type="button" class="example-chip" data-question="What work experience do you have at Amazon?">Work history</button>
+                <button type="button" class="example-chip" data-question="What is your favorite food?">Test abstention</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel result-panel" aria-labelledby="result-title" aria-live="polite" aria-busy="false">
+            <div class="panel-heading result-heading">
+              <div>
+                <span class="step">02</span>
+                <h3 id="result-title">Baseline response</h3>
+              </div>
+              <span id="result-status" class="result-status success"><span aria-hidden="true">✓</span> Evidence found</span>
+            </div>
+
+            <div id="loading-state" class="loading-state" hidden>
+              <span class="spinner" aria-hidden="true"></span>
+              <p>Searching the local profile…</p>
+            </div>
+
+            <div id="error-state" class="error-state" role="alert" hidden></div>
+
+            <div id="result-content">
+              <div class="answer-block">
+                <span class="label">First-person answer</span>
+                <p id="answer">I studied at University of Washington, and The University of Texas at Austin.</p>
+              </div>
+
+              <div class="evidence-heading">
+                <div>
+                  <span class="label">Supporting evidence</span>
+                  <p id="evidence-summary">2 profile lines matched</p>
+                </div>
+                <button id="copy-button" class="copy-button" type="button">Copy JSON</button>
+              </div>
+
+              <ol id="evidence-list" class="evidence-list">
+                <li><span class="evidence-index">01</span><span>University of Washington</span></li>
+                <li><span class="evidence-index">02</span><span>The University of Texas at Austin</span></li>
+              </ol>
+
+              <div class="trace-row">
+                <div><span>Engine</span><strong>Rule + retrieval</strong></div>
+                <div><span>Profile</span><strong>Local text</strong></div>
+                <div><span>Generation</span><strong>Deterministic</strong></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <footer class="workspace-footer">
+          <span>Minimal runnable baseline · reproducible offline</span>
+          <span>Manas Tole · CSE 598</span>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
